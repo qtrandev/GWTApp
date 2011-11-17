@@ -35,7 +35,7 @@ import com.google.gwt.xml.client.XMLParser;
 
 public class StockWatcher implements EntryPoint {
 
-  private static final int REFRESH_INTERVAL = 10000; // ms
+  private static final int REFRESH_INTERVAL = 5000; // ms
   private static final String XML_URL = GWT.getModuleBaseURL() + "proxy";
 
   private VerticalPanel mainPanel = new VerticalPanel();
@@ -44,6 +44,7 @@ public class StockWatcher implements EntryPoint {
   private TextBox newSymbolTextBox = new TextBox();
   private Button addStockButton = new Button("Add");
   private Label lastUpdatedLabel = new Label();
+  private Label nextUpdatedLabel = new Label("Data updates in "+REFRESH_INTERVAL/1000+ " seconds.");
   private ArrayList<String> stocks = new ArrayList<String>();
   private Label errorMsgLabel = new Label();
 
@@ -78,6 +79,7 @@ public class StockWatcher implements EntryPoint {
     mainPanel.add(stocksFlexTable);
     mainPanel.add(addPanel);
     mainPanel.add(lastUpdatedLabel);
+    mainPanel.add(nextUpdatedLabel);
 
     // Associate the Main panel with the HTML host page.
     RootPanel.get("stockList").add(mainPanel);
