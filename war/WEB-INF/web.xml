@@ -12,11 +12,6 @@
 
   <!-- Servlets -->
   <servlet>
-    <servlet-name>jsonStockData</servlet-name>
-    <servlet-class>com.qtrandev.stockwatcher.server.JsonStockData</servlet-class>
-  </servlet>
- 
-  <servlet>
     <servlet-name>proxyServlet</servlet-name>
     <servlet-class>com.qtrandev.stockwatcher.server.ProxyServlet</servlet-class>
   </servlet>
@@ -24,11 +19,6 @@
   <servlet-mapping>
     <servlet-name>proxyServlet</servlet-name>
     <url-pattern>/stockwatcher/proxy</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>jsonStockData</servlet-name>
-    <url-pattern>/stockwatcher/stockPrices</url-pattern>
   </servlet-mapping>
 
 </web-app>
