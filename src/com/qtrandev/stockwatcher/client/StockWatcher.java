@@ -46,8 +46,8 @@ public class StockWatcher implements EntryPoint {
   private Button addStockButton = new Button("Add");
   private Label lastUpdatedLabel = new Label();
   private Label nextUpdatedLabel = new Label("Data updates in "+REFRESH_INTERVAL/1000+ " seconds.");
-  private Label dataSourceLabel = new HTML("Source: <a href='http://www.google.com/ig/api?stock=goog' target='_blank'>"+
-		  "http://www.google.com/ig/api?stock=goog</a>");
+  private Label dataSourceLabel = new HTML("Source: <a href='http://www.google.com/ig/api?stock=GOOG' target='_blank'>"+
+		  "http://www.google.com/ig/api?stock=GOOG</a>");
   private ArrayList<String> stocks = new ArrayList<String>();
   private Label errorMsgLabel = new Label();
 
