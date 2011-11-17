@@ -22,6 +22,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -45,6 +46,8 @@ public class StockWatcher implements EntryPoint {
   private Button addStockButton = new Button("Add");
   private Label lastUpdatedLabel = new Label();
   private Label nextUpdatedLabel = new Label("Data updates in "+REFRESH_INTERVAL/1000+ " seconds.");
+  private Label dataSourceLabel = new HTML("Source: <a href='http://www.google.com/ig/api?stock=goog' target='_blank'>"+
+		  "http://www.google.com/ig/api?stock=goog</a>");
   private ArrayList<String> stocks = new ArrayList<String>();
   private Label errorMsgLabel = new Label();
 
@@ -78,8 +81,9 @@ public class StockWatcher implements EntryPoint {
     mainPanel.add(errorMsgLabel);
     mainPanel.add(stocksFlexTable);
     mainPanel.add(addPanel);
-    mainPanel.add(lastUpdatedLabel);
+    mainPanel.add(dataSourceLabel);
     mainPanel.add(nextUpdatedLabel);
+    mainPanel.add(lastUpdatedLabel);
 
     // Associate the Main panel with the HTML host page.
     RootPanel.get("stockList").add(mainPanel);
@@ -190,10 +194,11 @@ public class StockWatcher implements EntryPoint {
 				  if (200 == response.getStatusCode()) {
 					  processXML(response.getText());
 				  } else {
+					  System.out.println("ERROR: ");
 					  System.out.println("STATUS TEXT: "+response.getStatusText());
 					  System.out.println("STATUS CODE: "+response.getStatusCode());
 					  System.out.println("RESPONSE TEXT: "+response.getText());
-					  Window.alert("Handle the error. Can get the status text from response.getStatusText()");
+					  //Window.alert("Handle the error. Can get the status text from response.getStatusText()");
 				  }
 			  }
 		  });
