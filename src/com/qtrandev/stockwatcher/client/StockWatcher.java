@@ -46,8 +46,8 @@ public class StockWatcher implements EntryPoint {
   private Button addStockButton = new Button("Add");
   private Label lastUpdatedLabel = new Label();
   private Label nextUpdatedLabel = new Label("Data updates in "+REFRESH_INTERVAL/1000+ " seconds.");
-  private Label dataSourceLabel = new HTML("Source: <a href='http://www.google.com/ig/api?stock=GOOG' target='_blank'>"+
-		  "http://www.google.com/ig/api?stock=GOOG</a>");
+  private Label dataSourceLabel = new HTML("Source: <a href='http://finance.yahoo.com/d/quotes.csv?s=GOOG&f=sbc1' target='_blank'>"+
+		  "http://finance.yahoo.com/d/quotes.csv?s=GOOG&f=sbc1</a>");
   private ArrayList<String> stocks = new ArrayList<String>();
   private Label errorMsgLabel = new Label();
 
@@ -192,7 +192,7 @@ public class StockWatcher implements EntryPoint {
 			  
 			  public void onResponseReceived(Request request, Response response) {
 				  if (200 == response.getStatusCode()) {
-					  processXML(response.getText());
+					  processXMLYahoo(response.getText());
 				  } else {
 					  System.out.println("ERROR: ");
 					  System.out.println("STATUS TEXT: "+response.getStatusText());
@@ -207,7 +207,29 @@ public class StockWatcher implements EntryPoint {
 	  }
   }
   
-  private void processXML(String text) {
+  // Yahoo's stock API in csv format
+  // Ex: http://finance.yahoo.com/d/quotes.csv?s=GOOG&f=sbc
+  // Source: http://ilmusaham.wordpress.com/tag/stock-yahoo-data/
+  private void processXMLYahoo(String text) {
+	  
+	  try {
+		  if (!text.contains("N/A")) {
+			  // There are 3 items: symbol, price, and change
+			  String[] items = text.split(",");
+			  String symbol = items[0].replaceAll("\"", "");
+			  String price = items[1];
+			  String change = items[2].replaceAll("\"", "");
+			  
+			  updateTable(new StockData(symbol, new Double(price), new Double(change)));
+		  }
+		  
+	  } catch (DOMException e) {
+		  //Window.alert("Could not parse data.");
+	  }
+  }
+  
+  // No longer working since Google shut down the stock API
+  private void processXMLGoogle(String text) {
 	  //System.out.println("XML: "+text);
 	  try {
 		  // Parse the XML document into a DOM

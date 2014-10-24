@@ -38,7 +38,8 @@ import javax.servlet.http.HttpServletResponse;
 */
 public class ProxyServlet extends HttpServlet {
 	
-	private static final String targetServer = "http://www.google.com/ig/api";
+	//private static final String targetServer = "http://www.google.com/ig/api";
+	private static final String targetServer = "http://finance.yahoo.com/d/quotes.csv";
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -53,7 +54,7 @@ public class ProxyServlet extends HttpServlet {
 					query.append(s);
 					query.append("=");
 					query.append(req.getParameter(s));
-					query.append("&");
+					query.append("&f=sbc1");
 				}
 			}
 			URL url = new URL(targetServer+"?" + query.toString());
