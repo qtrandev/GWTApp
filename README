@@ -1,4 +1,4 @@
 Based off GWT Stock Watcher tutorial.
 http://code.google.com/webtoolkit/doc/latest/tutorial/gettingstarted.html
 Changed to retrieve real-time XML stock data from Google at http://www.google.com/ig/api?stock=goog
-Sample deployed at http://qtrandev.appspot.com
+Sample deployed at http://qtrandev.appspot.com - website is currently broken due to Google turning off its stock API.
